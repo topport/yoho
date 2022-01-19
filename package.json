@@ -1,0 +1,89 @@
+{
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "name": "electron-vite-esbuild-minimal",
+  "description": "Clean minimal template to build an Electron app with Vite and ESBuild.",
+  "version": "1.2.1",
+  "author": "DSRKafuU <dsrkafuu@outlook.com> (https://dsrkafuu.net)",
+  "license": "MIT",
+  "scripts": {
+    "post:package": "node -e \"try{require('./scripts/utils').writePackage()}catch{}\"",
+    "post:builder": "electron-builder install-app-deps",
+    "postinstall": "npm run post:package && npm run post:builder",
+    "dev": "cross-env NODE_ENV=development node ./scripts/dev.js",
+    "build:app": "node ./scripts/build.js",
+    "build:electron": "electron-builder build -mwl",
+    "build:all": "npm run build:app && npm run build:electron",
+    "build": "cross-env NODE_ENV=production npm run build"
+  },
+  "dependencies": {
+    "antd": "~4.17.3",
+    "react": "~17.0.2",
+    "react-dom": "~17.0.2",
+    "tslib": "~2.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "~16.11.13",
+    "@types/react": "~17.0.37",
+    "@types/react-dom": "~17.0.11",
+    "@typescript-eslint/eslint-plugin": "~5.7.0",
+    "@typescript-eslint/parser": "~5.7.0",
+    "@vitejs/plugin-react": "~1.1.3",
+    "chalk": "~4.1.2",
+    "cross-env": "~7.0.3",
+    "electron": "16.0.4",
+    "electron-builder": "~22.14.5",
+    "esbuild": "~0.14.5",
+    "eslint": "~8.4.1",
+    "eslint-plugin-react": "~7.27.1",
+    "eslint-plugin-react-hooks": "~4.3.0",
+    "fs-extra": "~10.0.0",
+    "less": "~4.1.2",
+    "prettier": "~2.5.1",
+    "typescript": "~4.5.4",
+    "vite": "~2.7.2"
+  },
+  "build": {
+    "appId": "net.dsrkafuu.evem",
+    "productName": "Electron Vite ESBuild Minimal",
+    "copyright": "Copyright © 2020-present DSRKafuU",
+    "directories": {
+      "app": "./app",
+      "output": "./build"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "tar.gz",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    }
+  }
+}
